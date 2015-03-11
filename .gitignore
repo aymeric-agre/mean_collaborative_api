@@ -21,3 +21,5 @@ node_modules
 .lock-wscript
 #exclude node_modules
 node_modules/
+#exclude webstorm configuration
+.idea/
