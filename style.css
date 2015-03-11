@@ -1,0 +1,82 @@
+#banniere
+{
+	margin-left: 0px;
+	margin-bottom: -25px;
+}
+#page
+{
+	width: 1200px;
+	margin-left :0px;
+	background-color:white;
+}
+#menu
+{
+	background-color: black;
+	color: lightgrey;
+	width: 1200px;
+	height: 25px;
+}
+#titre
+{
+	width: 1000px;
+	text-align: center;
+}
+#corps
+{
+	width: 1000px;
+}
+#cadre1
+{
+	width: 800px;
+	border-style: solid;
+	border-width:thin;
+	background-color: lightgrey;
+}
+#droite
+{
+	text-align: right;
+	color: grey;
+}
+#cadre2
+{
+	width: 380px;
+	border-style: solid;
+	border-width:thin;
+	background-color: lightgrey;
+}
+#cadre3
+{
+	width: 800px;
+	border-style: solid;
+	border-width:thin;
+	background-color: lightgrey;
+}
+#cadre
+{
+	width: 400px;
+	border-style: solid;
+	border-width:thin;
+	background-color: orange;
+}
+#cadre4
+{
+	width: 380px;
+	border-style: solid;
+	border-width:thin;
+	background-color: lightgrey;
+}
+#cadre5
+{
+	width: 800px;
+	border-style: solid;
+	border-width:thin;
+	background-color: lightgrey;
+	margin-bottom: 100px;
+}
+#footer
+{
+	width: 1200px;
+	background-color: black;
+	color: lightgrey;
+	text-align:center;
+}
