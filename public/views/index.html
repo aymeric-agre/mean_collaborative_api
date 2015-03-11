@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 
+
 <html>
-
-	<script>
-		var socket = io.connect('http://localhost:3000');
-		socket.on('message', function(message) {
-			alert('Le serveur a un message pour vous : ' + message);
-		})
-	</script>
-
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="../style/style.css" />
+        <link rel="stylesheet" href="style.css" />
         <title>Collaborative application</title>
     </head>
-
+	
+	
+ 
+	
     <body>
         <div id="bloc_page">
             <header>
@@ -25,12 +21,34 @@
                 </div>
             </header>
             
+			
+			
+			
+			<div id="dropzone">Coucou</div>
+ 
+			<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+			<script src="/socket.io/socket.io.js"></script>
+			<script type="text/javascript">
+				var socket = io.connect('http://localhost:3000'); //On connecte la socket
+				socket.on('message', function(message,room) { // On teste si on reçoit un message
+					alert('Le serveur a un message pour vous : ' + message.content + ' de la salle '+message.room+". Vous êtes en "+socket.room);
+					$(document.createElement('span'))
+						.text(message.content)
+						.appendTo($('#dropzone'));
+					
+				});
+			
+			</script>
+			
+			
 			<form method="post" action="#">
 				<label>Choisissez un code :</label>
 				<input type="text" name="room" size="30" maxlength="10"/>
-				<input type="submit" value="Aller à la page" />
+				<input type="submit" value="Changer de salle" />
 			</form>
 			
         </div>
     </body>
+	
+
 </html>
