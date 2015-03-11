@@ -1,0 +1,21 @@
+{
+  "name": "mean_collaborative_api",
+  "version": "0.0.0",
+  "homepage": "https://github.com/raeynok/mean_collaborative_api",
+  "authors": [
+    "Aymeric <aymeric.agre@gmail.com>"
+  ],
+  "description": "just a school project",
+  "main": "server.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
