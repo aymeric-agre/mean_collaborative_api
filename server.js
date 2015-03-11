@@ -32,4 +32,13 @@ app.route('/*')
 	console.log('You sent the code "' + req.body.room + '".');
     });
 
+/**
+ * Sockets
+ */
+io.on('connection', function (socket) {
+  console.log('client connected');
+  socket.emit('message', { content: 'Vous êtes bien connecté !', importance: '1' });
+});
+ 
+ 
 server.listen(3000);

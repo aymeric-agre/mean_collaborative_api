@@ -1,5 +1,14 @@
 <!DOCTYPE html>
+
 <html>
+
+	<script>
+		var socket = io.connect('http://localhost:3000');
+		socket.on('message', function(message) {
+			alert('Le serveur a un message pour vous : ' + message);
+		})
+	</script>
+
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../style/style.css" />
