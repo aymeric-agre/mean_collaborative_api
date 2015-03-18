@@ -6,3 +6,5 @@ app/tests/coverage/
 .bower-*/
 .idea/
 data/
+.idea
+bower_components
