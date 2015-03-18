@@ -19,11 +19,12 @@ app.set('views', __dirname + '/public/views');
  * Definition of middlewares
  */
 app.use(bodyParser());
+app.use(express.static(__dirname + '/public'));
 
 /**
  * Routing
  */
-app.route('/*')
+app.route('/')
     .get(function(req, res){
         res.render('index');
     })
@@ -32,27 +33,30 @@ app.route('/*')
         console.log('You sent the code "' + req.body.room + '".');
     });
 
+app.route('/postit')
+    .get(function(req, res){
+        res.render('postit');
+    });
 /**
  * Sockets
  */
 io.sockets.on('connection', function (socket) {
     console.log('a user is connected');
+
     socket.on('createNote', function(data){
-        console.log('message: ' + data);
-        io.emit('createNote', data);
-        socket.broadcast.emit(onNoteCreateData);
+        socket.broadcast.emit('onNoteCreated', data);
     });
 
     socket.on('updateNote', function(data){
-        socket.broadcast.emit(onNoteUpdateData);
+        socket.broadcast.emit('onNoteUpdateData', data);
     });
 
     socket.on('deleteNote', function(data){
-        socket.broadcast.emit(onNoteDeleteData);
+        socket.broadcast.emit('onNoteDeleteData', data);
     });
 
     socket.on('moveNote', function(data){
-        socket.broadcast.emit(onNoteMoveData);
+        socket.broadcast.emit('onNoteMoveData', data);
     });
 
     socket.on('disconnect', function(){

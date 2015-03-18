@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{mean_collaborative_api node_modules}" />
-    <file url="file://$PROJECT_DIR$/server.js" libraries="{Node.js Globals}" />
-    <file url="PROJECT" libraries="{Node.js v0.10.25 Core Modules, express-DefinitelyTyped, mean_collaborative_api node_modules, socket.io-DefinitelyTyped}" />
-    <includedPredefinedLibrary name="Node.js Globals" />
-  </component>
-</project>
