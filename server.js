@@ -4,13 +4,42 @@ var express = require('express'),
     cons = require('consolidate'),
     swig = require('swig'),
     app = express();
-	server = require('http').createServer(app),
+var server = require('http').createServer(app),
     io = require('socket.io').listen(server);
 
-// routing
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
+/**
+ * Rendering engine
+ */
+app.engine('html', cons.swig);
+
+app.set('view engine', 'html');
+app.set('views', __dirname + '/public/views');
+
+/**
+ * Definition of middlewares
+ */
+app.use(bodyParser());
+app.use(express.static(__dirname + '/public'));
+
+/**
+ * Routing
+ */
+app.route('/')
+    .get(function(req, res){
+        res.render('index');
+    })
+    .post(function(req, res) {
+        res.redirect('/'+req.body.room);
+        console.log('You sent the code "' + req.body.room + '".');
+    });
+
+app.route('/postit')
+    .get(function(req, res){
+        res.render('postit');
+    });
+/**
+ * Sockets
+ */
 
 // usernames which are currently connected to the chat
 var usernames = {};
@@ -37,6 +66,25 @@ function findClientsSocket(chatroomId, namespace) {
 
 io.sockets.on('connection', function (socket) {
 
+    socket.on('createNote', function(data){
+        socket.broadcast.emit('onNoteCreated', data);
+    });
+
+    socket.on('updateNote', function(data){
+        socket.broadcast.emit('onNoteUpdateData', data);
+    });
+
+    socket.on('deleteNote', function(data){
+        socket.broadcast.emit('onNoteDeleteData', data);
+    });
+
+    socket.on('moveNote', function(data){
+        socket.broadcast.emit('onNoteMoveData', data);
+    });
+
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', function(username){
 		//console.log('Ajout'+username);
@@ -118,6 +166,5 @@ io.sockets.on('connection', function (socket) {
 		socket.leave(socket.chatroom);
 	});
 });
-
 
 server.listen(3000);
