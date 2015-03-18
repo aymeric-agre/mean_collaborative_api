@@ -33,10 +33,6 @@ app.route('/')
         console.log('You sent the code "' + req.body.room + '".');
     });
 
-app.route('/postit')
-    .get(function(req, res){
-        res.render('postit');
-    });
 /**
  * Sockets
  */
@@ -65,26 +61,22 @@ function findClientsSocket(roomId, namespace) {
 	
 
 io.sockets.on('connection', function (socket) {
-
     socket.on('createNote', function(data){
-        socket.broadcast.emit('onNoteCreated', data);
+        socket.broadcast.to(socket.room).emit('onNoteCreated', data);
     });
 
     socket.on('updateNote', function(data){
-        socket.broadcast.emit('onNoteUpdateData', data);
+        socket.broadcast.to(socket.room).emit('onNoteUpdateData', data);
     });
 
     socket.on('deleteNote', function(data){
-        socket.broadcast.emit('onNoteDeleteData', data);
+        socket.broadcast.to(socket.room).emit('onNoteDeleteData', data);
     });
 
     socket.on('moveNote', function(data){
-        socket.broadcast.emit('onNoteMoveData', data);
+        socket.broadcast.to(socket.room).emit('onNoteMoveData', data);
     });
 
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', function(username){
 		console.log('Ajout'+username);
