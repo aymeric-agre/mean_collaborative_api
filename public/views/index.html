@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Collaborative application</title>
+    </head>
+	
+	
+ 
+	
+    <body>
+        <div id="bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <img src="images/logo.png" alt="Logo" id="logo" />
+                    <h1>Collaboration application</h1>
+                    <h2>Post-it</h2>
+                </div>
+            </header>
+
+			<div id="dropzone">Coucou</div>
+
+			<form method="post" action="#">
+				<label>Choisissez un code :</label>
+				<input type="text" name="room" size="30" maxlength="10"/>
+				<input type="submit" value="Changer de salle" />
+			</form>
+
+            <script src="/socket.io/socket.io.js"></script>
+            <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+            <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+            <script src="../lib/main.js"></script>
+
+        </div>
+    </body>
+	
+
+</html>
