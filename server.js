@@ -4,8 +4,34 @@ var express = require('express'),
     cons = require('consolidate'),
     swig = require('swig'),
     app = express();
+var mongoose = require('mongoose');
 var server = require('http').createServer(app),
     io = require('socket.io').listen(server);
+
+/**
+ * Database connection
+ */
+mongoose.connect('mongodb://localhost/PostChat');
+
+/**
+ * Room data schema
+ */
+var roomContentSchema = mongoose.Schema({
+    name: String,
+    postIts: [{
+        date: Number,
+        title: String,
+        body: String,
+        xPosition: Number,
+        yPosition: Number,
+        _id: false
+    }]
+});
+
+/**
+ * Definition of mongoose model
+ */
+var RoomContent = mongoose.model('RoomContent', roomContentSchema);
 
 /**
  * Rendering engine
@@ -63,22 +89,52 @@ function findClientsSocket(roomId, namespace) {
 io.sockets.on('connection', function (socket) {
     socket.on('createNote', function(data){
         socket.broadcast.to(socket.room).emit('onNoteCreated', data);
-        console.log('création d\'une note');
+        RoomContent.findOne({'name': socket.room}, function(err, thisRoomContent){
+            if(!err){
+                if(!thisRoomContent){
+                    thisRoomContent = new RoomContent({
+                        name: socket.room
+                    });
+                }
+                thisRoomContent.postIts.push(data);
+                thisRoomContent.save(function(err){
+                    if(!err){
+                        console.log('New postIt ' + data.date + ' correctly saved in room ' + thisRoomContent.name);
+                    }
+                    else{
+                        console.log('Error: could not save postIt ' + data.date);
+                    }
+                });
+            }
+        });
     });
 
     socket.on('updateNote', function(data){
         socket.broadcast.to(socket.room).emit('onNoteUpdated', data);
-        console.log('modification d\'une note');
+        RoomContent.update({'name': socket.room, 'postIts.date': data.date},{ '$set': {'postIts.$' : data}}, function(err, thisRoomContent){
+            if(!err){
+                console.log('PostIt n°' + data.date + ' has been updated');
+            }
+            else{
+                console.log(err);
+            }
+        });
     });
 
     socket.on('deleteNote', function(data){
         socket.broadcast.to(socket.room).emit('onNoteDeleted', data);
-        console.log('suppression d\'une note');
+        RoomContent.update({'name': socket.room},{ $pull: {'postIts': {date: data.date}}}, function(err, thisRoomContent){
+            if(!err){
+                console.log('PostIt n°' + data.date + ' has been deleted');
+            }
+            else{
+                console.log(err);
+            }
+        });
     });
 
     socket.on('moveNote', function(data){
         socket.broadcast.to(socket.room).emit('onNoteMoved', data);
-        console.log('déplacement d\'une note');
     });
 
 	// when the client emits 'adduser', this listens and executes
