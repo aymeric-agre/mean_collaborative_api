@@ -63,18 +63,22 @@ function findClientsSocket(roomId, namespace) {
 io.sockets.on('connection', function (socket) {
     socket.on('createNote', function(data){
         socket.broadcast.to(socket.room).emit('onNoteCreated', data);
+        console.log('création d\'une note');
     });
 
     socket.on('updateNote', function(data){
-        socket.broadcast.to(socket.room).emit('onNoteUpdateData', data);
+        socket.broadcast.to(socket.room).emit('onNoteUpdated', data);
+        console.log('modification d\'une note');
     });
 
     socket.on('deleteNote', function(data){
-        socket.broadcast.to(socket.room).emit('onNoteDeleteData', data);
+        socket.broadcast.to(socket.room).emit('onNoteDeleted', data);
+        console.log('suppression d\'une note');
     });
 
     socket.on('moveNote', function(data){
-        socket.broadcast.to(socket.room).emit('onNoteMoveData', data);
+        socket.broadcast.to(socket.room).emit('onNoteMoved', data);
+        console.log('déplacement d\'une note');
     });
 
 	// when the client emits 'adduser', this listens and executes
@@ -159,4 +163,4 @@ io.sockets.on('connection', function (socket) {
 	});
 });
 
-server.listen(3000);
+server.listen(8888);

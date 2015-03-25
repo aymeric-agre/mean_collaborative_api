@@ -28,7 +28,7 @@ app.directive('stickyNote', function(socket){
 
     var controller = function($scope){
         socket.on('onNoteUpdated', function(data){
-            if(data.id == $scope.node.id){
+            if(data.id == $scope.note.id){
                 $scope.note.title = data.title;
                 $scope.note.body = data.body;
             }
