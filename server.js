@@ -30,7 +30,7 @@ app.route('/')
     })
     .post(function(req, res) {
         res.redirect('/'+req.body.room);
-        console.log('You sent the code "' + req.body.room + '".');
+        //console.log('You sent the code "' + req.body.room + '".');
     });
 
 /**
@@ -93,9 +93,9 @@ io.sockets.on('connection', function (socket) {
 		// send client to room 1
 		socket.join('index');
 		// echo to client they've connected
-		socket.emit('updatechat', 'SERVER', 'you have connected to index');
+		socket.emit('updatechat', 'SERVEUR', 'Vous vous êtes connecté à index.');
 		// echo to room 1 that a person has connected to their room
-		socket.broadcast.to('index').emit('updatechat', 'SERVER', username + ' has connected to this room');
+		socket.broadcast.to('index').emit('updatechat', 'SERVEUR', username + ' vient de se connecter.');
 		
 		//Userlist
 		var clients_in_the_room = io.sockets.adapter.rooms[socket.room];
@@ -134,12 +134,12 @@ io.sockets.on('connection', function (socket) {
 		socket.broadcast.to(currentroom).emit('updateusers', usernames_in_previous_room);
 		// join new room, received as function parameter
 		socket.join(newroom);
-		socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
+		socket.emit('updatechat', 'SERVEUR', 'you have connected to '+ newroom);
 		// sent message to OLD room
-		socket.broadcast.to(currentroom).emit('updatechat', 'SERVER', socket.username+' has left this room');
+		socket.broadcast.to(currentroom).emit('updatechat', 'SERVEUR', socket.username+' a quitté la conversation.');
 		// update socket session room title
 		socket.room = newroom;
-		socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+		socket.broadcast.to(newroom).emit('updatechat', 'SERVEUR', socket.username+' a rejoint la conversation.');
 		// update the list of users in chat, client-side
 		var clients_in_the_room = io.sockets.adapter.rooms[socket.room];
 		var usernames_in_new_room = new Array();
@@ -158,7 +158,7 @@ io.sockets.on('connection', function (socket) {
 		// update list of users in chat, client-side
 		socket.broadcast.to(socket.room).emit('updateusers', findClientsSocket(socket.room));
 		// echo globally that this client has left
-		socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username + ' has disconnected');
+		socket.broadcast.to(socket.room).emit('updatechat', 'SERVEUR', socket.username + ' s\' est déconnecté.');
 		socket.leave(socket.room);
 	});
 });

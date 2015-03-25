@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="../style/postit.css">
 </head>
 
-<body ng-controller="PostitCtrl">
+<body id="page" ng-controller="PostitCtrl">
 <div class="navbar navbar-inverse">
     <div class="navbar-inner">
         <a class="brand" href="/">Chat application</a>
         <a class="brand" href="/postit">Collaborative Board</a>
-        <button id="createButton" ng-click="createNote()" class="btn btn-info pull-right">Create Note</button>
+        <button id="createButton" ng-click="createNote()" class="btn btn-info pull-right">Ajouter une note</button>
     </div>
 </div>
 <div sticky-note ng-repeat="note in notes" note="note" class="alert alert-block sticky-note" ondelete="deleteNote(id)">
@@ -32,17 +32,16 @@
 
 <div class="menuVerticalUsers">
 	<div id="scroll-users">
-		<b>USERS</b>
+		<b>Utilisateurs</b>
 		<div id="users"></div>
 	</div>
 </div>
 
 <div class="menuVerticalConversation">
 	<div>
-		<label>Choisissez un code :</label>
-		<div id="roomChoice"></div>
-		<input id="choiceRoom" style="width:200px;" maxlength="10"/>
-		<input type="button" id="dataRoom" value="room" />
+		<label>Aller dans la salle :
+		<input id="choiceRoom" style="width:80px;" maxlength="10"/>
+		<input type="button" id="dataRoom" value="Changer" /></label>
 	</div>
 
 	<div id="scroll-conversation">
@@ -51,6 +50,11 @@
 		<input type="button" id="datasend" value="send" />
 	</div>
 </div>
+
+<div class="background">
+</div>
+
 </body>
+
 
 </html>

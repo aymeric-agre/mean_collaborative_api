@@ -5,8 +5,8 @@
 }
 #page
 {
+	float:left;
 	width: 1200px;
-	margin-left :0px;
 	background-color:white;
 }
 #menu
@@ -82,16 +82,16 @@
 }
 #scroll-users  {
 	float:left;
-	width:80px;
+	width:100px;
 	height:500px;
 	padding:10px;
-	overflow-y:scroll;
+	overflow-y:auto;
 	overflow-x:auto;
 }
 #scroll-conversation  {
 	float:left;
 	width:300px;
-	height:500px;
+	height:470px;
 	padding:10px;
 }
 #conversation  {
@@ -104,19 +104,29 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 }
+
+.background {
+	float:left;
+	left:450px;
+	top:50px;
+	width:735px;
+	height:530px;
+	background-image: url("/images/background.jpeg");
+}
+
 .menuVerticalConversation  {
    float:left;
    width:300px;
    border-right:1px solid black;
-   height:550px;
+   height:500px;
    padding:10px;
 }
 
 .menuVerticalUsers {
    float:left;
-   width:100px;
+   width:120px;
    border-right:1px solid black;
-   height:550px;
+   height:500px;
    padding:10px;
 }
 
