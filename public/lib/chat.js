@@ -9,6 +9,8 @@ socket.on('connect', function(){
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on('updatechat', function (username, data) {
     $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+	document.getElementById('data').focus();
+	document.getElementById('conversation').scrollBy(0,300);
 });
 
 

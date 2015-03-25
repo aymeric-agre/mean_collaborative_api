@@ -80,6 +80,45 @@
 	color: lightgrey;
 	text-align:center;
 }
+#scroll-users  {
+	float:left;
+	width:80px;
+	height:500px;
+	padding:10px;
+	overflow-y:scroll;
+	overflow-x:auto;
+}
+#scroll-conversation  {
+	float:left;
+	width:300px;
+	height:500px;
+	padding:10px;
+}
+#conversation  {
+    margin: 0 auto;  /* zéro ou une autre valeur */
+	height:100%;
+	width: 100%;
+	word-wrap:break-word;
+    min-height: 450px;
+    max-height: 450px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.menuVerticalConversation  {
+   float:left;
+   width:300px;
+   border-right:1px solid black;
+   height:550px;
+   padding:10px;
+}
+
+.menuVerticalUsers {
+   float:left;
+   width:100px;
+   border-right:1px solid black;
+   height:550px;
+   padding:10px;
+}
 
 .sticky-note {
     position: absolute;

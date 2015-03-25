@@ -30,21 +30,26 @@
     <textarea ng-model="note.body" ng-change="updateNote(note)" class="body">{{note.body}}</textarea>
 </div>
 
+<div class="menuVerticalUsers">
+	<div id="scroll-users">
+		<b>USERS</b>
+		<div id="users"></div>
+	</div>
+</div>
 
-<div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
-    <b>USERS</b>
-    <div id="users"></div>
-</div>
-<div>
-    <label>Choisissez un code :</label>
-    <div id="roomChoice"></div>
-    <input id="choiceRoom" style="width:200px;" maxlength="10"y/>
-    <input type="button" id="dataRoom" value="room" />
-</div>
-<div style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;">
-    <div id="conversation"></div>
-    <input id="data" style="width:200px;" />
-    <input type="button" id="datasend" value="send" />
+<div class="menuVerticalConversation">
+	<div>
+		<label>Choisissez un code :</label>
+		<div id="roomChoice"></div>
+		<input id="choiceRoom" style="width:200px;" maxlength="10"/>
+		<input type="button" id="dataRoom" value="room" />
+	</div>
+
+	<div id="scroll-conversation">
+		<div id="conversation"></div>
+		<input id="data" style="width:200px;" autofocus/>
+		<input type="button" id="datasend" value="send" />
+	</div>
 </div>
 </body>
 
