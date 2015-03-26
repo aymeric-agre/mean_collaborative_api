@@ -86,6 +86,10 @@ app.controller('PostitCtrl', function($scope, socket){
         $scope.notes.push(data);
     });
 
+    socket.on('onRoomSwitched', function(){
+        $scope.notes = [];
+    });
+
     socket.on('onNoteDeleted', function(data){
         $scope.handleDeletedNote(data.date);
     });
@@ -95,7 +99,7 @@ app.controller('PostitCtrl', function($scope, socket){
             date: new Date().getTime(),
             title: 'New Note',
             body: 'Pending',
-            xPosition: 450,
+            xPosition: 470,
             yPosition: 50
         };
         $scope.notes.push(note);

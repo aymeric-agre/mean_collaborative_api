@@ -135,6 +135,14 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('moveNote', function(data){
         socket.broadcast.to(socket.room).emit('onNoteMoved', data);
+        RoomContent.update({'name': socket.room, 'postIts.date': data.date},{ '$set': {'postIts.$.xPosition' : data.xPosition, 'postIts.$.yPosition': data.yPosition}}, function(err, thisRoomContent){
+            if(!err){
+                console.log('PostIt n°' + data.date + ' has been updated');
+            }
+            else{
+                console.log(err);
+            }
+        });
     });
 
 	// when the client emits 'adduser', this listens and executes
@@ -148,6 +156,23 @@ io.sockets.on('connection', function (socket) {
 		usernames[username] = username;
 		// send client to room 1
 		socket.join('index');
+
+        // gathers all postIt from this room and emit them to the client
+        RoomContent.findOne({'name': socket.room}, function(err, thisRoomContent){
+            console.log(socket.room);
+            console.log(thisRoomContent);
+            if(!err) {
+                if (thisRoomContent) {
+                    thisRoomContent.postIts.forEach(function (element, index, table) {
+                        console.log(element);
+                        socket.emit('onNoteCreated', element);
+                    });
+                }
+            }else{
+                console.log(err);
+            }
+        });
+
 		// echo to client they've connected
 		socket.emit('updatechat', 'SERVEUR', 'Vous vous êtes connecté à index.');
 		// echo to room 1 that a person has connected to their room
@@ -185,6 +210,23 @@ io.sockets.on('connection', function (socket) {
 		  var client_socket = io.sockets.connected[clientId];//Do whatever you want with this
 		  usernames_in_previous_room.push(client_socket.username);
 		}
+
+        // gathers all postIt from this room and emit them to the client
+        RoomContent.findOne({'name': socket.room}, function(err, thisRoomContent){
+            // remove all postIt from the previous room
+            socket.emit('onRoomSwitched');
+            console.log(thisRoomContent);
+            if(!err) {
+                if (thisRoomContent) {
+                    thisRoomContent.postIts.forEach(function (element, index, table) {
+                        socket.emit('onNoteCreated', element);
+                        console.log(element);
+                    });
+                }
+            }else{
+                console.log(err);
+            }
+        });
 		
 		// Change users in previous room
 		socket.broadcast.to(currentroom).emit('updateusers', usernames_in_previous_room);
