@@ -21,7 +21,7 @@ app.directive('stickyNote', function(socket){
             }
         });
 
-        element.css('left', scope.note.xPosition + '%');
+        element.css('left', scope.note.xPosition + 'px');
         element.css('top', scope.note.yPosition + 'px');
         element.hide().fadeIn();
     };
@@ -99,7 +99,7 @@ app.controller('PostitCtrl', function($scope, socket){
             date: new Date().getTime(),
             title: 'New Note',
             body: 'Pending',
-            xPosition: 35,
+            xPosition: 470,
             yPosition: 50
         };
         $scope.notes.push(note);

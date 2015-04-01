@@ -17,7 +17,7 @@ socket.on('connect', function(){
 socket.on('updatechat', function (username, data) {
     $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
 	document.getElementById('data').focus();
-	document.getElementById('conversation').scrollHeight;
+	document.getElementById('conversation').scrollBy(0,300);
 });
 
 function switchRoom(room){
