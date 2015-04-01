@@ -1,149 +1,62 @@
-#banniere
-{
-	margin-left: 0px;
-	margin-bottom: -25px;
-}
 #page
 {
 	float:left;
-	width: 1200px;
+	width: 100%;
+	height: 100%;
 	background-color:white;
-}
-#menu
-{
-	background-color: black;
-	color: lightgrey;
-	width: 1200px;
-	height: 25px;
-}
-#titre
-{
-	width: 1000px;
-	text-align: center;
-}
-#corps
-{
-	width: 1000px;
-}
-#cadre1
-{
-	width: 800px;
-	border-style: solid;
-	border-width:thin;
-	background-color: lightgrey;
-}
-#droite
-{
-	text-align: right;
-	color: grey;
-}
-#cadre2
-{
-	width: 380px;
-	border-style: solid;
-	border-width:thin;
-	background-color: lightgrey;
-}
-#cadre3
-{
-	width: 800px;
-	border-style: solid;
-	border-width:thin;
-	background-color: lightgrey;
-}
-#cadre
-{
-	width: 400px;
-	border-style: solid;
-	border-width:thin;
-	background-color: orange;
-}
-#cadre4
-{
-	width: 380px;
-	border-style: solid;
-	border-width:thin;
-	background-color: lightgrey;
-}
-#cadre5
-{
-	width: 800px;
-	border-style: solid;
-	border-width:thin;
-	background-color: lightgrey;
-	margin-bottom: 100px;
-}
-#footer
-{
-	width: 1200px;
-	background-color: black;
-	color: lightgrey;
-	text-align:center;
 }
 #scroll-users  {
 	float:left;
-	width:100px;
-	height:500px;
+	width:95%;
+	height: 500px;
 	padding:10px;
 	overflow-y:auto;
 	overflow-x:auto;
 }
 #scroll-conversation  {
 	float:left;
-	width:300px;
-	height:470px;
+	width:95%;
+	height:500px;
 	padding:10px;
 }
 #conversation  {
     margin: 0 auto;  /* zéro ou une autre valeur */
-	height:100%;
-	width: 100%;
+	width:95%;
 	word-wrap:break-word;
-    min-height: 450px;
-    max-height: 450px;
+    height: 450px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
 
-.background {
-	float:left;
-	left:450px;
-	top:50px;
-	width:735px;
-	height:530px;
-	background-image: url("/images/background.jpeg");
+#choiceRoom {
+	width: 80px;
 }
 
-.menuVerticalConversation  {
-   float:left;
-   width:300px;
-   border-right:1px solid black;
-   height:500px;
-   padding:10px;
+#data{
+	width: 200px;
 }
 
 .menuVerticalUsers {
    float:left;
-   width:120px;
+   width:10%;
    border-right:1px solid black;
-   height:500px;
+   height:100%;
    padding:10px;
 }
 
-.sticky-note {
-    position: absolute;
+.menuVerticalConversation  {
+    float:left;
+    width:20%;
+    border-right:1px solid black;
+    height:100%;
+    padding:10px;
 }
 
-.sticky-note .title {
-    backgrount: transparent;
-    border: none;
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.sticky-note .body {
-    background: transparent;
-    border: none;
-    display: block;
+.background {
+    float:left;
+    left:37%;
+    top:50px;
+    width:63%;
+    height:570px;
+    background-image: url("/images/background.jpeg");
 }
