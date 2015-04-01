@@ -59,14 +59,6 @@ app.route('/')
         //console.log('You sent the code "' + req.body.room + '".');
     });
 
-app.route('/webrtc')
-    .get(function(req, res){
-        res.render('videoChat');
-    })
-    .post(function(req, res){
-        res.redirect('/webrtc/' + req.body.room);
-    })
-
 /**
  * Sockets
  */
@@ -208,7 +200,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on('switchRoom', function(newroom){
 		//console.log('switch room');
 		// leave the current room (stored in session)
-		currentroom = socket.room;
+		currentroom=socket.room;
         if(currentroom != newroom) {
             socket.leave(socket.room);
 
@@ -259,11 +251,6 @@ io.sockets.on('connection', function (socket) {
         }
 	});
 
-	socket.on('videoStream', function(data, username){
-		socket.broadcast.to(socket.room).emit('videoStreamed', data, username);
-		console.log(data);
-	})
-	
 	// when the user disconnects.. perform this
 	socket.on('disconnect', function(){
 		// remove the username from global usernames list

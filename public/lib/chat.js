@@ -1,23 +1,18 @@
-var socket = io.connect(),
-	username = '';
+var socket = io.connect();
 
 // on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){
     // call the server-side function 'adduser' and send one parameter (value of prompt)
-	while(username == '' || username == null){
-		username = prompt("Choisissez un nom d'utilisateur: ").trim();
-	}
-	if(username != '' && username != null){
-		socket.emit('adduser', username);
-	}
+    socket.emit('adduser', prompt("Choisissez un nom d'utilisateur : "));
 });
 
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on('updatechat', function (username, data) {
     $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
 	document.getElementById('data').focus();
-	document.getElementById('conversation').scrollHeight;
+	document.getElementById('conversation').scrollBy(0,300);
 });
+
 
 function switchRoom(room){
     socket.emit('switchRoom', room);
@@ -27,11 +22,7 @@ function switchRoom(room){
 socket.on('updateusers', function(data) {
     $('#users').empty();
     $.each(data, function(key, value) {
-		if(value == username){
-			$('#users').append('<div class="user"><video id="localVideo" autoplay></video><span class="userName">' + value + '</span></div>');
-		}else{
-			$('#users').append('<div class="user"><video id="remoteVideo' + value +'" class="remoteVideo" autoplay></video><span class="userName">' + value + '</span></div>');
-		}
+        $('#users').append('<div>' + value + '</div>');
     });
 });
 
