@@ -46,7 +46,18 @@ socket.on('updateusers', function(data) {
 });
 
 socket.on('videoStreamed', function(data, username){
-	console.log(data);
+	// var xhr = new XMLHttpRequest();
+	// xhr.open('GET', data, true);
+	// xhr.responseType = 'blob';
+	// xhr.onload = function(e){
+		// if(this.status == 200){
+			// var myblob = this.reponse;
+			// var remVideo = document.getElementById('remoteVideo'+username);
+			// remVideo.src = data;
+			// remVideo.play();
+		// }
+	// }
+	// xhr.send();
 	var remVideo = document.getElementById('remoteVideo'+username);
 	remVideo.src = data;
 	remVideo.play();
@@ -106,6 +117,17 @@ function onSuccess(stream) {
 	window.stream = stream;
 	video.src = window.URL.createObjectURL(stream);
 	video.play();
+	
+	// var xhr = new XMLHttpRequest();
+	// xhr.open('GET', video.src, true);
+	// xhr.responseType = 'blob';
+	// xhr.onload = function(e){
+		// if(this.status == 200){
+			// var myblob = this.reponse;
+		// }
+	// }
+	// xhr.send();
+	
 	socket.emit('videoStream', video.src, thisUserName);
 }
 //If the stream is not accessible

@@ -28,9 +28,9 @@ socket.on('updateusers', function(data) {
     $('#users').empty();
     $.each(data, function(key, value) {
 		if(value == username){
-			$('#users').append('<div class="user"><video id="localVideo" autoplay></video><span class="userName">' + value + '</span></div>');
+			$('#users').append('<div class="userName">' + value + '</div>');
 		}else{
-			$('#users').append('<div class="user"><video id="remoteVideo' + value +'" class="remoteVideo" autoplay></video><span class="userName">' + value + '</span></div>');
+			$('#users').append('<div class="userName">' + value + '</div>');
 		}
     });
 });

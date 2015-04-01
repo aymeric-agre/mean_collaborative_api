@@ -271,7 +271,7 @@ io.sockets.on('connection', function (socket) {
 		// update list of users in chat, client-side
 		socket.broadcast.to(socket.room).emit('updateusers', findClientsSocket(socket.room));
 		// echo globally that this client has left
-		socket.broadcast.to(socket.room).emit('updatechat', 'SERVEUR', socket.username + ' s\' est déconnecté.');
+		socket.broadcast.to(socket.room).emit('updatechat', 'SERVEUR', socket.username + ' s\'est déconnecté.');
 		socket.leave(socket.room);
 	});
 });
