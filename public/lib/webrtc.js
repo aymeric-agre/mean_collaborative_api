@@ -46,21 +46,11 @@ socket.on('updateusers', function(data) {
 });
 
 socket.on('videoStreamed', function(data, username){
-	// var xhr = new XMLHttpRequest();
-	// xhr.open('GET', data, true);
-	// xhr.responseType = 'blob';
-	// xhr.onload = function(e){
-		// if(this.status == 200){
-			// var myblob = this.reponse;
-			// var remVideo = document.getElementById('remoteVideo'+username);
-			// remVideo.src = data;
-			// remVideo.play();
-		// }
-	// }
-	// xhr.send();
-	var remVideo = document.getElementById('remoteVideo'+username);
-	remVideo.src = data;
-	remVideo.play();
+	if(username != thisUserName){
+		var remVideo = document.getElementById('remoteVideo'+username);
+		remVideo.src = data;
+		remVideo.play();
+	}	
 });
 
 // on load of page
@@ -116,17 +106,8 @@ var video = null,
 function onSuccess(stream) {
 	window.stream = stream;
 	video.src = window.URL.createObjectURL(stream);
+	video.muted = true;
 	video.play();
-	
-	// var xhr = new XMLHttpRequest();
-	// xhr.open('GET', video.src, true);
-	// xhr.responseType = 'blob';
-	// xhr.onload = function(e){
-		// if(this.status == 200){
-			// var myblob = this.reponse;
-		// }
-	// }
-	// xhr.send();
 	
 	socket.emit('videoStream', video.src, thisUserName);
 }
